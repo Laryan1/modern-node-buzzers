@@ -43,11 +43,17 @@ export interface ButtonPressEvent {
   timestamp: number;
 }
 
+export const ButtonAction = {
+  PRESSED: 'pressed',
+  RELEASED: 'released',
+} as const;
+export type ButtonActionEnum = (typeof ButtonAction)[keyof typeof ButtonAction];
+
 export interface ButtonEvent {
   controller: number;
   button: number;
   buttonName: string;
-  action: 'pressed' | 'released';
+  action: ButtonActionEnum;
   timestamp: number;
 }
 

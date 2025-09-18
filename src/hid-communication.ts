@@ -215,3 +215,37 @@ export function getBuzzControllerDetails(): Array<
       hidPath: controller.device!.path!,
     }));
 }
+
+/**
+ * Waits for a Buzz controller to be connected
+ * @param timeoutMs Maximum time to wait in milliseconds (default: 30000ms / 30 seconds)
+ * @param pollIntervalMs Polling interval in milliseconds (default: 1000ms / 1 second)
+ * @returns Promise that resolves to the first detected Buzz controller, or rejects on timeout
+ */
+export function waitForBuzzController(
+  timeoutMs: number = 30000,
+  pollIntervalMs: number = 1000
+): Promise<BuzzController> {
+  return new Promise((resolve, reject) => {
+    const startTime = Date.now();
+
+    const poll = (): void => {
+      const controllers = detectBuzzControllers();
+
+      if (controllers.length > 0) {
+        const firstController = controllers[0];
+        if (firstController) resolve(firstController);
+        return;
+      }
+
+      if (Date.now() - startTime >= timeoutMs) {
+        reject(new Error(`No Buzz controller detected within ${timeoutMs}ms`));
+        return;
+      }
+
+      setTimeout(poll, pollIntervalMs);
+    };
+
+    poll();
+  });
+}
