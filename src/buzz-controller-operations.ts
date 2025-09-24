@@ -23,42 +23,42 @@ import {
  * - Communication protocols
  *
  * LED Control Protocol:
- * - Command format: [0x00, 0x00, buzzer1, buzzer2, buzzer3, buzzer4]
+ * - Command format: [0x00, 0x00, 0, 1, 2, 3]
  * - Header: Always starts with [0x00, 0x00]
  * - LED values: 0x00 = off, 0xFF = on for each buzzer
  * - Total message length: 6 bytes
  */
 
 export interface BuzzerLedState {
-  buzzer1: boolean;
-  buzzer2: boolean;
-  buzzer3: boolean;
-  buzzer4: boolean;
+  0: boolean;
+  1: boolean;
+  2: boolean;
+  3: boolean;
 }
 
 export interface BuzzerButtonState {
-  buzzer1: {
+  0: {
     red: boolean;
     yellow: boolean;
     green: boolean;
     orange: boolean;
     blue: boolean;
   };
-  buzzer2: {
+  1: {
     red: boolean;
     yellow: boolean;
     green: boolean;
     orange: boolean;
     blue: boolean;
   };
-  buzzer3: {
+  2: {
     red: boolean;
     yellow: boolean;
     green: boolean;
     orange: boolean;
     blue: boolean;
   };
-  buzzer4: {
+  3: {
     red: boolean;
     yellow: boolean;
     green: boolean;
@@ -160,10 +160,10 @@ export class BuzzControllerInstance {
     const command = [
       0x00, // Header byte 1
       0x00, // Header byte 2
-      ledState.buzzer1 ? 0xff : 0x00, // Buzzer 1 LED
-      ledState.buzzer2 ? 0xff : 0x00, // Buzzer 2 LED
-      ledState.buzzer3 ? 0xff : 0x00, // Buzzer 3 LED
-      ledState.buzzer4 ? 0xff : 0x00, // Buzzer 4 LED
+      ledState[0] ? 0xff : 0x00, // Buzzer 1 LED
+      ledState[1] ? 0xff : 0x00, // Buzzer 2 LED
+      ledState[2] ? 0xff : 0x00, // Buzzer 3 LED
+      ledState[3] ? 0xff : 0x00, // Buzzer 4 LED
     ];
     return this.sendLedCommand(command);
   }
@@ -175,10 +175,10 @@ export class BuzzControllerInstance {
    */
   lightSpecificBuzzers(buzzerNumbers: number[]): boolean {
     const ledState: BuzzerLedState = {
-      buzzer1: buzzerNumbers.includes(1),
-      buzzer2: buzzerNumbers.includes(2),
-      buzzer3: buzzerNumbers.includes(3),
-      buzzer4: buzzerNumbers.includes(4),
+      0: buzzerNumbers.includes(1),
+      1: buzzerNumbers.includes(2),
+      2: buzzerNumbers.includes(3),
+      3: buzzerNumbers.includes(4),
     };
     return this.setLedStates(ledState);
   }
@@ -336,10 +336,10 @@ export class BuzzLedPatterns {
    */
   static playerReady(playerNumber: number): BuzzerLedState {
     return {
-      buzzer1: playerNumber === 1,
-      buzzer2: playerNumber === 2,
-      buzzer3: playerNumber === 3,
-      buzzer4: playerNumber === 4,
+      0: playerNumber === 1,
+      1: playerNumber === 2,
+      2: playerNumber === 3,
+      3: playerNumber === 4,
     };
   }
 
@@ -350,10 +350,10 @@ export class BuzzLedPatterns {
    */
   static countdown(count: number): BuzzerLedState {
     return {
-      buzzer1: count >= 1,
-      buzzer2: count >= 2,
-      buzzer3: count >= 3,
-      buzzer4: count >= 4,
+      0: count >= 1,
+      1: count >= 2,
+      2: count >= 3,
+      3: count >= 4,
     };
   }
 
@@ -372,10 +372,10 @@ export class BuzzLedPatterns {
    */
   static allActive(): BuzzerLedState {
     return {
-      buzzer1: true,
-      buzzer2: true,
-      buzzer3: true,
-      buzzer4: true,
+      0: true,
+      1: true,
+      2: true,
+      3: true,
     };
   }
 
@@ -385,10 +385,10 @@ export class BuzzLedPatterns {
    */
   static allOff(): BuzzerLedState {
     return {
-      buzzer1: false,
-      buzzer2: false,
-      buzzer3: false,
-      buzzer4: false,
+      0: false,
+      1: false,
+      2: false,
+      3: false,
     };
   }
 
@@ -399,10 +399,10 @@ export class BuzzLedPatterns {
    */
   static alternating(even: boolean): BuzzerLedState {
     return {
-      buzzer1: !even, // Odd
-      buzzer2: even, // Even
-      buzzer3: !even, // Odd
-      buzzer4: even, // Even
+      0: !even, // Odd
+      1: even, // Even
+      2: !even, // Odd
+      3: even, // Even
     };
   }
 }
@@ -431,10 +431,10 @@ export class BuzzControllerUtils {
     return [
       0x00, // Header
       0x00, // Header
-      ledState.buzzer1 ? 0xff : 0x00,
-      ledState.buzzer2 ? 0xff : 0x00,
-      ledState.buzzer3 ? 0xff : 0x00,
-      ledState.buzzer4 ? 0xff : 0x00,
+      ledState[0] ? 0xff : 0x00,
+      ledState[1] ? 0xff : 0x00,
+      ledState[2] ? 0xff : 0x00,
+      ledState[3] ? 0xff : 0x00,
     ];
   }
 
@@ -447,10 +447,10 @@ export class BuzzControllerUtils {
     const validNumbers = buzzerNumbers.filter(this.isValidBuzzerNumber);
 
     return {
-      buzzer1: validNumbers.includes(1),
-      buzzer2: validNumbers.includes(2),
-      buzzer3: validNumbers.includes(3),
-      buzzer4: validNumbers.includes(4),
+      0: validNumbers.includes(1),
+      1: validNumbers.includes(2),
+      2: validNumbers.includes(3),
+      3: validNumbers.includes(4),
     };
   }
 }

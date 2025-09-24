@@ -90,7 +90,7 @@ export const BUTTON_NAMES: Record<number, string> = {
 // Bit positions for each controller/button combination
 const CONTROLLER_BIT_MAPPING = {
   // Controller 1 - byte3 bits
-  1: {
+  0: {
     0: { byte: 2, bit: 0 }, // Red: 0b00000001 = 1
     1: { byte: 2, bit: 4 }, // Blue: 0b00010000 = 16
     2: { byte: 2, bit: 3 }, // Orange: 0b00001000 = 8
@@ -98,7 +98,7 @@ const CONTROLLER_BIT_MAPPING = {
     4: { byte: 2, bit: 1 }, // Yellow: 0b00000010 = 2
   },
   // Controller 2 - byte3 bits 5-7 + byte4 bits 0-1
-  2: {
+  1: {
     0: { byte: 2, bit: 5 }, // Red: 0b00100000 = 32
     1: { byte: 3, bit: 1 }, // Blue: 0b00000010 = 2
     2: { byte: 3, bit: 0 }, // Orange: 0b00000001 = 1
@@ -106,7 +106,7 @@ const CONTROLLER_BIT_MAPPING = {
     4: { byte: 2, bit: 6 }, // Yellow: 0b01000000 = 64
   },
   // Controller 3 - byte4 bits 2-6
-  3: {
+  2: {
     0: { byte: 3, bit: 2 }, // Red: 0b00000100 = 4
     1: { byte: 3, bit: 6 }, // Blue: 0b01000000 = 64
     2: { byte: 3, bit: 5 }, // Orange: 0b00100000 = 32
@@ -114,7 +114,7 @@ const CONTROLLER_BIT_MAPPING = {
     4: { byte: 3, bit: 3 }, // Yellow: 0b00001000 = 8
   },
   // Controller 4 - byte4 bit 7 + byte5 special values
-  4: {
+  3: {
     0: { byte: 3, bit: 7 }, // Red: 0b10000000 = 128
     1: { byte: 4, bit: 3 }, // Blue: special byte5 value
     2: { byte: 4, bit: 2 }, // Orange: special byte5 value
