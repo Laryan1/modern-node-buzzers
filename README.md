@@ -1,6 +1,7 @@
 # Modern Node Buzzers
 
 A modern Node.js TypeScript library for interfacing with Buzz! controllers via HID communication.
+Library inspired by [buzz-buzzers](https://github.com/functino/buzz-buzzers) and [node-buzzers](https://github.com/francoismassart/node-buzzers).
 
 ## Features
 
