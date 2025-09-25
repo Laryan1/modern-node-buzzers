@@ -1,5 +1,5 @@
 {
-  "name": "modern-node-buzzers",
+  "name": "@laryan1/modern-node-buzzers",
   "version": "0.1.0",
   "description": "A modern Node.js TypeScript library to handle Buzz! games buzzers",
   "main": "dist/index.js",
@@ -50,6 +50,9 @@
     "url": "https://github.com/Laryan1/modern-node-buzzers/issues"
   },
   "homepage": "https://github.com/Laryan1/modern-node-buzzers#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/node": "^24.4.0",
