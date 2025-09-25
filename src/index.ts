@@ -21,7 +21,6 @@ import {
   isValidButtonPress,
   ButtonAction,
 } from './button-mapping';
-import { playground } from './playground';
 
 // Re-export types and functions for public API
 export type {
@@ -45,5 +44,3 @@ export {
   isValidButtonPress,
   waitForBuzzController,
 };
-
-playground();
